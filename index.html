@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Little Something for You ♡</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #fff8f5;
+        color: #694d4d;
+        font-family: "DM Sans", sans-serif;
+        overflow-x: hidden;
+      }
+      section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px;
+      }
+      h1,
+      h2 {
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+      }
+      .container {
+        width: 100%;
+        max-width: 650px;
+        text-align: center;
+      }
+      .heart {
+        color: #d78c98;
+        font-size: 30px;
+        animation: heartbeat 1.5s infinite;
+      }
+      @keyframes heartbeat {
+        50% {
+          transform: scale(1.2);
+        }
+      }
+      .small-text {
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 11px;
+        color: #bd9292;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: clamp(40px, 8vw, 65px);
+        margin-bottom: 20px;
+        color: #855e65;
+      }
+      p {
+        line-height: 1.9;
+        font-size: 15px;
+        color: #8e7373;
+      }
+      button {
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: 0.3s;
+      }
+      button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+        transform: none;
+      }
+      .primary-btn {
+        margin-top: 35px;
+        padding: 15px 32px;
+        background: #d99ba4;
+        color: white;
+        border-radius: 40px;
+        font-size: 14px;
+        box-shadow: 0 6px 20px #d99ba444;
+      }
+      .primary-btn:hover {
+        background: #c7838e;
+        transform: translateY(-3px);
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      /* Opening screen */
+      #opening {
+        background:
+          radial-gradient(circle at top right, #f9e5e3, transparent 45%),
+          #fff8f5;
+      }
+      .envelope {
+        font-size: 85px;
+        margin: 35px 0;
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      /* Confession */
+      #confession {
+        background: #f9eeeb;
+      }
+      .letter {
+        background: #fffdfb;
+        padding: 55px 45px;
+        border-radius: 8px;
+        box-shadow: 0 15px 50px #ad85851a;
+        text-align: left;
+        position: relative;
+      }
+      .letter h2 {
+        font-size: 37px;
+        margin-bottom: 28px;
+        color: #986b72;
+        text-align: center;
+      }
+      .letter p {
+        margin-bottom: 18px;
+        font-size: 15px;
+        line-height: 2;
+      }
+      .signature {
+        text-align: right;
+        margin-top: 30px;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: #bd818a;
+      }
+
+      /* Final question */
+      #question {
+        background:
+          radial-gradient(circle at bottom left, #f8e2e2, transparent 45%),
+          #fff8f5;
+      }
+      .question-card {
+        background: #fffdfb;
+        padding: 55px 30px;
+        border-radius: 15px;
+        box-shadow: 0 15px 50px #ad85851a;
+      }
+      .question-card h2 {
+        font-size: 38px;
+        margin: 20px 0;
+        color: #986b72;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .answer-btn {
+        padding: 14px 25px;
+        border-radius: 30px;
+        font-size: 13px;
+      }
+      .yes {
+        background: #d99ba4;
+        color: white;
+      }
+      .time {
+        background: #f5e8e5;
+        color: #916d70;
+      }
+      .answer-btn:hover {
+        transform: translateY(-3px);
+      }
+      #response {
+        margin-top: 30px;
+        font-family: "Playfair Display", serif;
+        font-size: 21px;
+        color: #b77c87;
+        line-height: 1.7;
+      }
+      #email-status {
+        margin-top: 12px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #8e7373;
+        min-height: 1.6em;
+      }
+      #email-status.error {
+        color: #a34d5b;
+      }
+
+      /* Floating petals */
+      .petal {
+        position: fixed;
+        top: -30px;
+        color: #e8b5bd;
+        opacity: 0.6;
+        pointer-events: none;
+        animation: fall linear forwards;
+        z-index: 10;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      footer {
+        padding: 20px;
+        text-align: center;
+        color: #bd9999;
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      @media (max-width: 600px) {
+        .letter {
+          padding: 35px 25px;
+        }
+        .letter h2 {
+          font-size: 30px;
+        }
+        .letter p {
+          font-size: 14px;
+        }
+        .question-card {
+          padding: 40px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- OPENING -->
+    <section id="opening">
+      <div class="container">
+        <div class="heart">♡</div>
+        <p class="small-text">A little something for you</p>
+        <h1>Hi, Rayn.</h1>
+        <p>
+          I made something special.<br />
+          There's something I've been wanting to tell you.
+        </p>
+        <div class="envelope">💌</div>
+        <button class="primary-btn" onclick="openLetter()">
+          Open my little letter ♡
+        </button>
+      </div>
+    </section>
+
+    <!-- CONFESSION -->
+    <section id="confession" class="hidden">
+      <div class="container">
+        <div class="letter">
+          <h2>My Little Confession...</h2>
+          <p>
+            Maybe this is a little unexpected, but I wanted to be honest about
+            how I feel.
+          </p>
+          <p>
+            I don't know exactly when it started, but I realized that I'd like
+            to know you beyond the little things I already know.
+          </p>
+          <p>
+            I'd love to hear your stories, learn about the things you love,
+            discover your dreams and thoughts, and get to know all the little
+            things that make you who you are.
+          </p>
+          <p>
+            I don't want to rush anything. I just want the chance to know you
+            better and discover more about the person behind that smile.
+          </p>
+          <div class="signature">With sincerity, ♡</div>
+        </div>
+        <button class="primary-btn" onclick="showQuestion()">
+          One more thing...
+        </button>
+      </div>
+    </section>
+
+    <!-- FINAL QUESTION -->
+    <section id="question" class="hidden">
+      <div class="container">
+        <div class="question-card">
+          <div class="heart">♡</div>
+          <p class="small-text">And finally...</p>
+          <h2>Would you let me<br />get to know you better?</h2>
+          <p>
+            No pressure, no expectations.<br />
+            I just wanted you to know how I feel.
+          </p>
+          <div class="buttons">
+            <button class="answer-btn yes" onclick="respond('yes', this)">
+              I'd love to! ♡
+            </button>
+            <button class="answer-btn time" onclick="respond('time', this)">
+              I need some time
+            </button>
+          </div>
+          <div id="response" aria-live="polite"></div>
+          <div id="email-status" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>MADE WITH A LITTLE COURAGE AND A LOT OF SINCERITY ♡</footer>
+
+    <!-- EmailJS browser SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      // EmailJS configuration supplied by you.
+      const EMAILJS_SERVICE_ID = "service_3wnqami";
+      const EMAILJS_TEMPLATE_ID = "template_ythy732";
+      const EMAILJS_PUBLIC_KEY = "5i2SIlIP0ILsU8EDN";
+
+      let emailJsReady = false;
+      let responseSent = false;
+      let isSending = false;
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const status = document.getElementById("email-status");
+        if (!window.emailjs) {
+          status.textContent =
+            "The email service could not load. Please refresh and try again.";
+          status.classList.add("error");
+          return;
+        }
+
+        try {
+          emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+          emailJsReady = true;
+        } catch (error) {
+          console.error("EmailJS initialization failed:", error);
+          status.textContent =
+            "Email setup could not start. Please refresh and try again.";
+          status.classList.add("error");
+        }
+      });
+
+      function showSection(id) {
+        document.querySelectorAll("section").forEach((section) => {
+          section.classList.add("hidden");
+        });
+        const target = document.getElementById(id);
+        target.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openLetter() {
+        showSection("confession");
+      }
+      function showQuestion() {
+        showSection("question");
+      }
+
+      async function respond(answer, clickedButton) {
+        const responseElement = document.getElementById("response");
+        const statusElement = document.getElementById("email-status");
+        const buttons = document.querySelectorAll(".answer-btn");
+
+        if (isSending || responseSent) return;
+
+        const selectedResponse =
+          answer === "yes" ? "I'd love to! ♡" : "I need some time";
+
+        responseElement.textContent =
+          answer === "yes"
+            ? "You just made me smile. Thank you for giving me a chance. ♡"
+            : "That's completely okay. Take all the time you need. Thank you for reading my little letter. ♡";
+
+        statusElement.classList.remove("error");
+        if (answer === "yes") createHearts();
+
+        if (!emailJsReady) {
+          statusElement.textContent =
+            "Your response is shown here, but the email service is unavailable. Please try refreshing the page.";
+          statusElement.classList.add("error");
+          return;
+        }
+
+        isSending = true;
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+        statusElement.textContent = "Sending your response... ♡";
+
+        const submittedAt = new Date().toLocaleString(undefined, {
+          dateStyle: "medium",
+          timeStyle: "long",
+        });
+
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            response: selectedResponse,
+            submitted_at: submittedAt,
+          });
+
+          responseSent = true;
+          statusElement.textContent =
+            "Your response has been sent. Thank you. ♡";
+        } catch (error) {
+          console.error("EmailJS send failed:", error);
+          statusElement.textContent =
+            "We couldn't send the email. Please check your connection and try again.";
+          statusElement.classList.add("error");
+          buttons.forEach((button) => {
+            button.disabled = false;
+          });
+        } finally {
+          isSending = false;
+        }
+      }
+
+      function createHearts() {
+        for (let i = 0; i < 25; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.innerHTML = "♥";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.bottom = "-30px";
+            heart.style.color = "#d99ba4";
+            heart.style.fontSize = 15 + Math.random() * 20 + "px";
+            heart.style.zIndex = "100";
+            heart.style.pointerEvents = "none";
+            heart.style.transition = "transform 3s, opacity 3s";
+            document.body.appendChild(heart);
+
+            requestAnimationFrame(() => {
+              heart.style.transform = `translateY(-${window.innerHeight + 100}px) rotate(360deg)`;
+              heart.style.opacity = "0";
+            });
+            setTimeout(() => heart.remove(), 3200);
+          }, i * 100);
+        }
+      }
+
+      /* Falling petals */
+      function createPetal() {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.innerHTML = "✿";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.fontSize = 12 + Math.random() * 15 + "px";
+        petal.style.animationDuration = 5 + Math.random() * 6 + "s";
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 11000);
+      }
+
+      setInterval(createPetal, 900);
+    </script>
+  </body>
+</html>
